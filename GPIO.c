@@ -17,7 +17,7 @@ void Servo_PB4_Init(void)
 	// Pins 
 	GPIOB->AFSEL |= 0x10;    // Enable alternate function on PB7
 	GPIOB->PCTL &= ~0x000F0000; // Clear PMC7 SLOT
-	GPIOB->PCTL |= 0x00010000;  // Write 4 to PMC6 to assign PWM0 to PB6
+	GPIOB->PCTL |= 0x00040000;  // Write 4 to PMC6 to assign PWM0 to PB6
 	GPIOB->DEN |= 0x10;         // Enable digital functionality on PB6
 	
 	
@@ -67,7 +67,7 @@ void Servo_PB6_Init(void)
 	
 	// Enable
 	PWM0->_0_CTL |= 0x01;       // Start timer generator 0
-	PWM0->ENABLE |= 0x02;       // Connect signal to the PB6 pin (PWM0EN)
+	PWM0->ENABLE |= 0x01;       // Connect signal to the PB6 pin (PWM0EN)
 }
 
 void Servo_PB5_Init(void)
