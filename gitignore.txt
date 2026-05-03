@@ -1,0 +1,16 @@
+# Keil build output and temporary files
+Objects/
+Listings/
+DebugConfig/
+*.o
+*.d
+*.crf
+*.lnp
+*.axf
+*.htm
+*.map
+*.dep
+*.bak
+*.uvgui.*
+*.uvguix.*
+*.scvd
