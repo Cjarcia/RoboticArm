@@ -10,4 +10,9 @@ void Servo_PB5_Init(void);
 
 void Servo_PF3_Init(void);
 
+void Servo_PF0_Init(void);
+
+void Servo_PF1_Init(void);
+
+
 void Port_Initialization(void);

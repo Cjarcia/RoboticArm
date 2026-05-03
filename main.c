@@ -11,6 +11,10 @@ int main(void){
 	// 1. Initialize Servo
 	Servo_PB4_Init();
 	Servo_PB6_Init();
+	Servo_PB5_Init();
+	Servo_PF1_Init();
+	Servo_PF0_Init();
+	Servo_PF3_Init();
 	//2. initialize ADC potentiometer
 	ADC_Init();
 	
@@ -36,9 +40,9 @@ int main(void){
 		new_compare1 = 5000 - high_ticks1;
     
     // 7. Update the PWM hardware to move the servo!
-    PWM0->_1_CMPA = new_compare0;//PE2
+    PWM1->_3_CMPB = new_compare0;//PE2 with PF3
 		
-    PWM0->_0_CMPA = new_compare1;//PE1
+    PWM0->_1_CMPB = new_compare1;//PE1 with PB5
     //delay
 		for(volatile int i = 0; i < 40000; i++);
 	  //SysTick_Delay1ms(20);

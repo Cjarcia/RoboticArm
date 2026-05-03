@@ -1,14 +1,14 @@
 #include "TM4C123GH6PM.h"
+void delayMs(int n);
 
 void Port_Initialization(void){
 // Clocks
-	SYSCTL->RCGCPWM |= 0x01;  // Enable clock to PWM module 0
-	SYSCTL->RCGCGPIO |= 0x02; // Enable clock to Port B
-
+	SYSCTL->RCGCPWM |= 0x03;  // Enable clock to PWM module 0
+	SYSCTL->RCGCGPIO |= 0x22; // Enable clock to Port B and F
 // PWM clock configuration (/64 Divider from teammate's code)
 	SYSCTL->RCC &= ~0x000E0000; // Clear the PWMDIV field
 	SYSCTL->RCC |= 0x001A0000;  // Set USEPWMDIV and set divider to /64
-   
+  delayMs(100);
 
 }
 
@@ -105,11 +105,6 @@ void Servo_PB6_Init(void)
 
 
 void Servo_PF3_Init(void){
-	SYSCTL -> RCGCGPIO |= 0x20; //enable port F clock
-	SYSCTL -> RCGCPWM |= 0x02; //enable clock to PWM1
-	SYSCTL -> RCC &= ~0x000E0000;//clear divider
-	//we will be using systemclk/64
-	SYSCTL -> RCC |= 0x001A0000; //set bit 20 for system clock/64
 	GPIOF -> AFSEL |= 0x08; //PF3 uses PWM7 apart of generator 3
 	GPIOF -> PCTL &= ~0x0000F000; 
 	GPIOF -> PCTL |= 0x00005000; 
@@ -121,10 +116,52 @@ void Servo_PF3_Init(void){
 	//make load up point and comparator down point by setting 0x2 to bit 7 6 and 0x3 to bits 3 2
 	PWM1 -> _3_GENB &= ~0x00000FFF;
 	PWM1 -> _3_GENB |= 0x0000080C;
-	PWM1->_3_LOAD = 625; 
-	PWM1->_3_CMPB = 500;
+	PWM1->_3_LOAD = 5000 - 1;
+	PWM1->_3_CMPB = 4625;
   PWM1->_3_CTL = 1;    // enable counter
   PWM1->ENABLE |= 0x80; // enable PWM7 output
 
 }
+
+void Servo_PF0_Init(void){
+	GPIOF->LOCK = 0x4C4F434B;
+	GPIOF->CR |= 0x01;
+	
+	GPIOF -> AFSEL |= 0x01;
+	GPIOF -> PCTL &= ~0x0000000F; 
+	GPIOF -> PCTL |= 0x00000005;
+	GPIOF -> DEN |= 0x01;
+	PWM1 -> _2_CTL = 0;
+	PWM1 -> _2_GENA &= ~0x00000FFF;
+	PWM1->_2_GENA = (0x03 << 2) | (0x02 << 6); 
+	PWM1->_2_LOAD = 5000 - 1;
+	PWM1->_2_CMPA = 4625;
+	PWM1->_2_CTL |= 1; 
+	PWM1->ENABLE |= 0x10; // enable PWM4 output
+}
+
+void Servo_PF1_Init(void){
+	GPIOF -> AFSEL |= 0x02;
+	GPIOF -> PCTL &= ~0x000000F0; 
+	GPIOF -> PCTL |= 0x00000050;
+	GPIOF -> DEN |= 0x02;
+	PWM1 -> _2_CTL = 0;
+	PWM1 -> _2_GENB &= ~0x00000FFF;
+	PWM1 -> _2_GENB |= 0x0000080C;
+	PWM1->_2_LOAD = 5000 - 1;
+	PWM1->_2_CMPB = 4625;
+	PWM1->_2_CTL |= 1; 
+	PWM1->ENABLE |= 0x20; // enable PWM5 output
+}
+
+void delayMs(int n){
+	
+		int i,j;
+		for(i = 0; i<n; i++){
+			for(j=0; j<3000; j++){
+				//do nothing
+			}
+		
+		}
+	}
 
