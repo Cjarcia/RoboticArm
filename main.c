@@ -28,13 +28,13 @@ int main(void){
 	//uint32_t adc_result;
 	uint32_t high_ticks0;
 	uint32_t high_ticks1;
-	uint32_t high_ticks2;
+	//uint32_t high_ticks2;
 	uint32_t high_ticks3;
 	uint32_t high_ticks4;
 	uint32_t high_ticks5;
 	uint32_t new_compare0;
 	uint32_t new_compare1;
-	uint32_t new_compare2;
+	//uint32_t new_compare2;
 	uint32_t new_compare3;
 	uint32_t new_compare4;
 	uint32_t new_compare5;
@@ -47,7 +47,7 @@ int main(void){
 		// Map 12-bit ADC (0-4095) to PWM high ticks (0.5ms to 2.5ms)
 		high_ticks0 = 125 + ((adc_buffer[0] * 500) / 4095);
 		high_ticks1 = 125 + ((adc_buffer[1] * 500) / 4095);
-		high_ticks2 = 125 + ((adc_buffer[2] * 500) / 4095);
+	//high_ticks2 = 125 + ((adc_buffer[2] * 500) / 4095);
 		high_ticks3 = 125 + ((adc_buffer[3] * 500) / 4095);
 		high_ticks4 = 125 + ((adc_buffer[4] * 500) / 4095);
 		high_ticks5 = 125 + ((adc_buffer[5] * 500) / 4095);
@@ -55,7 +55,7 @@ int main(void){
 		// 4. Calculate compare values (timer counts DOWN from 5000)
 		new_compare0 = 5000 - high_ticks0;
 		new_compare1 = 5000 - high_ticks1;
-		new_compare2 = 5000 - high_ticks2; // Note: PB6 assignment currently missing below
+		//new_compare2 = 5000 - high_ticks2; 
 		new_compare3 = 5000 - high_ticks3;
 		new_compare4 = 5000 - high_ticks4;
 		new_compare5 = 5000 - high_ticks5;
