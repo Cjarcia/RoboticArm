@@ -6,7 +6,7 @@ void Port_Initialization(void){
 	SYSCTL->RCGCPWM |= 0x03;  // Enable clock to PWM module 0 AND module 1
 	SYSCTL->RCGCGPIO |= 0x22; // Enable clock to Port B and F
 	
-	// PWM clock configuration (/64 Divider from teammate's code)
+	// PWM clock configuration
 	SYSCTL->RCC &= ~0x000E0000; // Clear the PWMDIV field
 	SYSCTL->RCC |= 0x001A0000;  // Set USEPWMDIV and set divider to /64
 	delayMs(100);
